@@ -50,10 +50,7 @@ const handleGoToYourEvents = () => {
         <h2>Already Registered</h2>
         <p>You have already secured a confirmed ticket for this event.</p>
         <div class="notice-actions">
-          <router-link
-            :to="'/browse/your-events/' + event.id"
-            class="btn-primary-link"
-          >
+          <router-link :to="'/browse/your-events/' + event.id" class="btn-primary-link">
             View Your Ticket Receipt &rarr;
           </router-link>
           <button class="btn-secondary-link" @click="handleBackToDetail">
@@ -66,13 +63,8 @@ const handleGoToYourEvents = () => {
       <div v-else-if="event.done" class="notice-card">
         <span class="notice-badge">CONCLUDED</span>
         <h2>Registration Closed</h2>
-        <p>
-          This event has already concluded. Registrations are no longer accepted.
-        </p>
-        <button
-          class="btn-secondary-link"
-          @click="router.push('/browse/events')"
-        >
+        <p>This event has already concluded. Registrations are no longer accepted.</p>
+        <button class="btn-secondary-link" @click="router.push('/browse/events')">
           Browse Active Events
         </button>
       </div>
@@ -82,9 +74,7 @@ const handleGoToYourEvents = () => {
         <span class="notice-badge">SOLD OUT</span>
         <h2>Event Full</h2>
         <p>All available seats for this event have been filled.</p>
-        <button class="btn-secondary-link" @click="handleBackToDetail">
-          Back to Event Detail
-        </button>
+        <button class="btn-secondary-link" @click="handleBackToDetail">Back to Event Detail</button>
       </div>
 
       <!-- 4. KONDISI NORMAL: TATA LETAK DUA KOLOM -->
@@ -109,13 +99,8 @@ const handleGoToYourEvents = () => {
     <div v-else class="notice-card">
       <span class="notice-badge">NOT FOUND</span>
       <h2>Event Not Found</h2>
-      <p>
-        The event you are trying to register for is not available or has been deleted.
-      </p>
-      <button
-        class="btn-secondary-link"
-        @click="router.push('/browse/events')"
-      >
+      <p>The event you are trying to register for is not available or has been deleted.</p>
+      <button class="btn-secondary-link" @click="router.push('/browse/events')">
         Back to Event Catalog
       </button>
     </div>
@@ -130,20 +115,12 @@ const handleGoToYourEvents = () => {
       @close="handleGoToCatalog"
     >
       <!-- ISI BADAN MODAL: KOMPONEN TANDA TERIMA -->
-      <RegistrationReceipt
-        :confirmed-data="confirmedData"
-        :event="event"
-      />
+      <RegistrationReceipt :confirmed-data="confirmedData" :event="event" />
 
       <!-- ISI FOOTER MODAL: TOMBOL AKSI GANDA LEWAT NAMED SLOT -->
       <template #footer>
-        <button class="btn-cancel" @click="handleGoToCatalog">
-          Back to Event Catalog
-        </button>
-        <button
-          class="btn-confirm btn-primary"
-          @click="handleGoToYourEvents"
-        >
+        <button class="btn-cancel" @click="handleGoToCatalog">Back to Event Catalog</button>
+        <button class="btn-confirm btn-primary" @click="handleGoToYourEvents">
           Go to Your Events &rarr;
         </button>
       </template>
@@ -270,7 +247,9 @@ const handleGoToYourEvents = () => {
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.2s ease, transform 0.1s;
+  transition:
+    all 0.2s ease,
+    transform 0.1s;
   min-height: 42px;
 }
 

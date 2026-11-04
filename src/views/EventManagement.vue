@@ -8,13 +8,7 @@ import OrganizerEventCard from '@/components/event/OrganizerEventCard.vue'
 import EventCreateForm from '@/components/event/EventCreateForm.vue'
 
 const router = useRouter()
-const {
-  activeEvents,
-  completedEvents,
-  createEvent,
-  completeEvent,
-  deleteEvent,
-} = useEvents()
+const { activeEvents, completedEvents, createEvent, completeEvent, deleteEvent } = useEvents()
 
 // KONDISI TAB AKTIF: 'active' | 'create' | 'completed'
 const currentTab = ref('active')
@@ -71,9 +65,7 @@ const handleCreateEvent = (eventData) => {
           Manage event lifecycle, publish new events, and archive completed ones.
         </p>
       </div>
-      <AppButton variant="primary" @click="currentTab = 'create'">
-        + Create New Event
-      </AppButton>
+      <AppButton variant="primary" @click="currentTab = 'create'"> + Create New Event </AppButton>
     </div>
 
     <!-- TAB NAVIGATION SYSTEM -->
@@ -122,10 +114,7 @@ const handleCreateEvent = (eventData) => {
 
     <!-- TAB 2: CREATE EVENT FORM -->
     <section v-if="currentTab === 'create'" class="tab-pane">
-      <EventCreateForm
-        @submit="handleCreateEvent"
-        @cancel="currentTab = 'active'"
-      />
+      <EventCreateForm @submit="handleCreateEvent" @cancel="currentTab = 'active'" />
     </section>
 
     <!-- TAB 3: COMPLETED EVENTS (ARCHIVE) -->

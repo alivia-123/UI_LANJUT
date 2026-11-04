@@ -39,10 +39,10 @@ const isDiscardModalOpen = ref(false)
 const isFormDirty = computed(() => {
   return Boolean(
     form.fullName.trim() ||
-      form.email.trim() ||
-      form.phone.trim() ||
-      form.dob ||
-      form.reason.trim(),
+    form.email.trim() ||
+    form.phone.trim() ||
+    form.dob ||
+    form.reason.trim(),
   )
 })
 
@@ -109,13 +109,7 @@ const validateAll = () => {
   validateField('dob')
   validateField('reason')
 
-  return (
-    !errors.fullName &&
-    !errors.email &&
-    !errors.phone &&
-    !errors.dob &&
-    !errors.reason
-  )
+  return !errors.fullName && !errors.email && !errors.phone && !errors.dob && !errors.reason
 }
 
 // SUBMIT HANDLER
@@ -160,16 +154,12 @@ const handleConfirmDiscard = () => {
       </header>
 
       <!-- KOTAK PERINGATAN KESALAHAN VALIDASI -->
-      <div v-if="errorMessage" class="error-banner">
-        ⚠️ {{ errorMessage }}
-      </div>
+      <div v-if="errorMessage" class="error-banner">⚠️ {{ errorMessage }}</div>
 
       <form @submit.prevent="handleSubmit" class="attendee-form">
         <!-- 1. FULL NAME -->
         <div class="form-group">
-          <label for="fullName">
-            Full Name <span class="required">*</span>
-          </label>
+          <label for="fullName"> Full Name <span class="required">*</span> </label>
           <input
             id="fullName"
             v-model="form.fullName"
@@ -184,9 +174,7 @@ const handleConfirmDiscard = () => {
 
         <!-- 2. EMAIL ADDRESS -->
         <div class="form-group">
-          <label for="email">
-            Email Address <span class="required">*</span>
-          </label>
+          <label for="email"> Email Address <span class="required">*</span> </label>
           <input
             id="email"
             v-model="form.email"
@@ -201,9 +189,7 @@ const handleConfirmDiscard = () => {
 
         <!-- 3. PHONE NUMBER -->
         <div class="form-group">
-          <label for="phone">
-            Phone Number <span class="required">*</span>
-          </label>
+          <label for="phone"> Phone Number <span class="required">*</span> </label>
           <input
             id="phone"
             v-model="form.phone"
@@ -218,9 +204,7 @@ const handleConfirmDiscard = () => {
 
         <!-- 4. DATE OF BIRTH -->
         <div class="form-group">
-          <label for="dob">
-            Date of Birth <span class="required">*</span>
-          </label>
+          <label for="dob"> Date of Birth <span class="required">*</span> </label>
           <input
             id="dob"
             v-model="form.dob"
@@ -233,9 +217,7 @@ const handleConfirmDiscard = () => {
 
         <!-- 5. REASON FOR ATTENDING -->
         <div class="form-group">
-          <label for="reason">
-            Reason for Attending <span class="required">*</span>
-          </label>
+          <label for="reason"> Reason for Attending <span class="required">*</span> </label>
           <textarea
             id="reason"
             v-model="form.reason"
@@ -249,12 +231,8 @@ const handleConfirmDiscard = () => {
 
         <!-- FORM ACTIONS -->
         <div class="form-actions">
-          <button type="button" class="btn-cancel-form" @click="handleCancelClick">
-            Cancel
-          </button>
-          <button type="submit" class="btn-submit-form">
-            Submit Registration
-          </button>
+          <button type="button" class="btn-cancel-form" @click="handleCancelClick">Cancel</button>
+          <button type="submit" class="btn-submit-form">Submit Registration</button>
         </div>
       </form>
     </AppCard>

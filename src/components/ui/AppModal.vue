@@ -46,10 +46,7 @@ defineEmits(['confirm', 'close'])
     <div v-if="isOpen" class="modal-overlay" @click.self="$emit('close')">
       <div class="modal-card">
         <div class="modal-header">
-          <span
-            v-if="badgeText"
-            :class="['modal-badge', `badge-${badgeVariant || variant}`]"
-          >
+          <span v-if="badgeText" :class="['modal-badge', `badge-${badgeVariant || variant}`]">
             {{ badgeText }}
           </span>
           <h3 class="modal-title">{{ title }}</h3>
@@ -62,17 +59,10 @@ defineEmits(['confirm', 'close'])
 
         <div class="modal-footer">
           <slot name="footer">
-            <button
-              v-if="showCancel"
-              class="btn-cancel"
-              @click="$emit('close')"
-            >
+            <button v-if="showCancel" class="btn-cancel" @click="$emit('close')">
               {{ cancelText }}
             </button>
-            <button
-              :class="['btn-confirm', `btn-${variant}`]"
-              @click="$emit('confirm')"
-            >
+            <button :class="['btn-confirm', `btn-${variant}`]" @click="$emit('confirm')">
               {{ confirmText }}
             </button>
           </slot>
@@ -220,7 +210,9 @@ defineEmits(['confirm', 'close'])
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.2s ease, transform 0.1s;
+  transition:
+    all 0.2s ease,
+    transform 0.1s;
   min-height: 42px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }

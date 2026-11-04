@@ -22,8 +22,7 @@ const filteredEvents = computed(() => {
     const matchSearch =
       event.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       event.loc.toLowerCase().includes(searchQuery.value.toLowerCase())
-    const matchCat =
-      selectedCategory.value === 'All' || event.cat === selectedCategory.value
+    const matchCat = selectedCategory.value === 'All' || event.cat === selectedCategory.value
     return matchSearch && matchCat
   })
 })
@@ -63,8 +62,8 @@ const handleViewDetail = (id) => {
       <div class="empty-badge">CATALOG EMPTY</div>
       <h3>No Events Available Yet</h3>
       <p>
-        There are currently no active events scheduled. Are you an organizer?
-        Publish and manage your first event today through the Dashboard!
+        There are currently no active events scheduled. Are you an organizer? Publish and manage
+        your first event today through the Dashboard!
       </p>
       <div class="empty-action">
         <AppButton variant="primary" @click="router.push('/dashboard')">

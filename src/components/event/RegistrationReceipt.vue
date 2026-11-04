@@ -14,8 +14,8 @@ defineProps({
 <template>
   <div class="receipt-preview">
     <p class="receipt-greeting">
-      Thank you, <strong>{{ confirmedData?.fullName }}</strong>! Your registration for
-      <strong>{{ event?.title }}</strong> has been officially confirmed.
+      Thank you, <strong>{{ confirmedData?.fullName }}</strong
+      >! Your registration for <strong>{{ event?.title }}</strong> has been officially confirmed.
     </p>
 
     <div class="receipt-box">

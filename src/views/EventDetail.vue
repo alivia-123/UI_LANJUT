@@ -20,9 +20,7 @@ const isRegistered = computed(() => {
 
 <template>
   <div class="event-detail-page">
-    <button @click="router.push('/browse/events')" class="btn-back">
-      &larr; Back to Events
-    </button>
+    <button @click="router.push('/browse/events')" class="btn-back">&larr; Back to Events</button>
 
     <!-- KONDISI JIKA EVENT DITEMUKAN -->
     <div v-if="event" class="detail-header">
@@ -84,17 +82,10 @@ const isRegistered = computed(() => {
 
               <!-- STATUS 2: SUDAH TERDAFTAR -->
               <div v-else-if="isRegistered" class="registered-action-group">
-                <AppButton
-                  variant="secondary"
-                  class="btn-register btn-registered"
-                  disabled
-                >
+                <AppButton variant="secondary" class="btn-register btn-registered" disabled>
                   Already Registered
                 </AppButton>
-                <router-link
-                  :to="'/browse/your-events/' + event.id"
-                  class="view-receipt-link"
-                >
+                <router-link :to="'/browse/your-events/' + event.id" class="view-receipt-link">
                   View Your Ticket Receipt &rarr;
                 </router-link>
               </div>
@@ -120,10 +111,7 @@ const isRegistered = computed(() => {
               </AppButton>
             </div>
 
-            <p
-              v-if="!event.done && !isRegistered && event.quota > 0"
-              class="spots"
-            >
+            <p v-if="!event.done && !isRegistered && event.quota > 0" class="spots">
               {{ event.quota }} seats available
             </p>
           </AppCard>

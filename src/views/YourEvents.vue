@@ -11,9 +11,7 @@ const { userRegistrations, cancelRegistration, getEventById, events } = useEvent
 
 // HANYA MENAMPILKAN PENDAFTARAN DARI EVENT YANG MASIH ADA DI SISTEM
 const activeRegistrations = computed(() => {
-  return userRegistrations.value.filter((r) =>
-    events.value.some((e) => e.id === r.eventId),
-  )
+  return userRegistrations.value.filter((r) => events.value.some((e) => e.id === r.eventId))
 })
 
 // MEMERIKSA STATUS SELESAI EVENT DARI ORGANIZER DASHBOARD SECARA REAKTIF
@@ -64,11 +62,7 @@ const handleConfirmCancel = () => {
 
     <!-- LIST TIKET TERDAFTAR -->
     <div v-else class="tickets-grid">
-      <AppCard
-        v-for="item in activeRegistrations"
-        :key="item.id"
-        class="ticket-summary-card"
-      >
+      <AppCard v-for="item in activeRegistrations" :key="item.id" class="ticket-summary-card">
         <div class="card-top">
           <div class="top-left">
             <span class="category-tag">{{ item.eventCat }}</span>

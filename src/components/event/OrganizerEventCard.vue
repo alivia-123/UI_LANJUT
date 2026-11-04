@@ -36,21 +36,13 @@ defineEmits(['view-detail', 'complete', 'delete'])
 
     <div class="card-actions">
       <template v-if="!isCompleted">
-        <button
-          class="btn-action btn-detail"
-          @click="$emit('view-detail', event.id)"
-        >
+        <button class="btn-action btn-detail" @click="$emit('view-detail', event.id)">
           👁️ View Details
         </button>
-        <button
-          class="btn-action btn-complete"
-          @click="$emit('complete', event)"
-        >
+        <button class="btn-action btn-complete" @click="$emit('complete', event)">
           ✅ Complete Event
         </button>
-        <button class="btn-action btn-delete" @click="$emit('delete', event)">
-          🗑️ Delete
-        </button>
+        <button class="btn-action btn-delete" @click="$emit('delete', event)">🗑️ Delete</button>
       </template>
 
       <template v-else>

@@ -53,16 +53,10 @@ const handleConfirmCancel = () => {
           <span
             :class="[
               'status-badge',
-              isEventDone(activeTicket.eventId)
-                ? 'badge-concluded'
-                : 'badge-confirmed',
+              isEventDone(activeTicket.eventId) ? 'badge-concluded' : 'badge-confirmed',
             ]"
           >
-            {{
-              isEventDone(activeTicket.eventId)
-                ? 'EVENT CONCLUDED'
-                : 'CONFIRMED PASS'
-            }}
+            {{ isEventDone(activeTicket.eventId) ? 'EVENT CONCLUDED' : 'CONFIRMED PASS' }}
           </span>
           <span class="ref-code">#{{ activeTicket.bookingCode }}</span>
         </div>
@@ -125,10 +119,7 @@ const handleConfirmCancel = () => {
       </section>
 
       <footer class="receipt-footer">
-        <button
-          class="btn-primary"
-          @click="router.push('/browse/your-events')"
-        >
+        <button class="btn-primary" @click="router.push('/browse/your-events')">
           Back to Your Events
         </button>
 
@@ -149,13 +140,8 @@ const handleConfirmCancel = () => {
     <div v-else class="notice-card">
       <span class="notice-badge">NOT FOUND</span>
       <h2>Ticket Not Found</h2>
-      <p>
-        You do not have an active registration for this event, or it has been cancelled.
-      </p>
-      <button
-        class="btn-primary"
-        @click="router.push('/browse/your-events')"
-      >
+      <p>You do not have an active registration for this event, or it has been cancelled.</p>
+      <button class="btn-primary" @click="router.push('/browse/your-events')">
         View Your Events List
       </button>
     </div>

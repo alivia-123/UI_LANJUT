@@ -80,12 +80,8 @@ const handleSubmitEvent = () => {
       Information entered here will be instantly published to the Gatherly public catalog.
     </p>
 
-    <div v-if="errorMessage" class="alert-box alert-error">
-      ⚠️ {{ errorMessage }}
-    </div>
-    <div v-if="successMessage" class="alert-box alert-success">
-      ✨ {{ successMessage }}
-    </div>
+    <div v-if="errorMessage" class="alert-box alert-error">⚠️ {{ errorMessage }}</div>
+    <div v-if="successMessage" class="alert-box alert-success">✨ {{ successMessage }}</div>
 
     <form @submit.prevent="handleSubmitEvent" class="event-form">
       <div class="form-group">
@@ -150,16 +146,8 @@ const handleSubmitEvent = () => {
       </div>
 
       <div class="form-actions">
-        <button
-          type="button"
-          class="btn-secondary-action"
-          @click="emit('cancel')"
-        >
-          Cancel
-        </button>
-        <AppButton variant="primary" type="submit">
-          🚀 Publish Event Now
-        </AppButton>
+        <button type="button" class="btn-secondary-action" @click="emit('cancel')">Cancel</button>
+        <AppButton variant="primary" type="submit"> 🚀 Publish Event Now </AppButton>
       </div>
     </form>
   </AppCard>
