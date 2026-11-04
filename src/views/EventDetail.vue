@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useEvents } from '@/composables/useEvents'
 import AppButton from '@/components/ui/AppButton.vue'
@@ -7,7 +7,7 @@ import AppCard from '@/components/ui/AppCard.vue'
 
 const route = useRoute()
 const router = useRouter()
-const { getEventById, isUserRegistered } = useEvents()
+const { getEventById, isUserRegistered, fetchEventById, loading, error } = useEvents()
 
 // MENGAMBIL DATA EVENT DINAMIS DARI STATE BERDASARKAN ID DI URL
 const event = computed(() => getEventById(route.params.id))
@@ -16,28 +16,50 @@ const event = computed(() => getEventById(route.params.id))
 const isRegistered = computed(() => {
   return event.value ? isUserRegistered(event.value.id) : false
 })
+
+// PASTIKAN DATA DIAMBIL DARI REST API JIKA USER LANGSUNG MASUK KE URL DETAIL
+onMounted(async () => {
+  if (!event.value) {
+    await fetchEventById(route.params.id)
+  }
+})
 </script>
 
 <template>
   <div class="event-detail-page">
     <button @click="router.push('/browse/events')" class="btn-back">&larr; Back to Events</button>
 
-    <!-- KONDISI JIKA EVENT DITEMUKAN -->
-    <div v-if="event" class="detail-header">
-      <div class="header-tags">
-        <span class="event-tag">{{ event.cat }}</span>
-        <span v-if="event.done" class="status-tag status-ended">Event Finished</span>
-        <span v-else-if="isRegistered" class="status-tag status-registered">Registered</span>
-        <span v-else-if="event.quota <= 0" class="status-tag status-soldout">Sold Out</span>
-        <span v-else class="status-tag status-live">Open Registration</span>
-      </div>
+    <!-- KONDISI 1: LOADING DETAIL ACARA DARI SERVER -->
+    <div
+      v-if="loading"
+      class="detail-header skeleton-shimmer"
+      style="min-height: 180px; display: flex; align-items: center; justify-content: center"
+    >
+      <p style="color: var(--text-muted); font-size: 1.1rem; font-weight: 500">
+        ⏳ Memuat rincian acara dari server...
+      </p>
+    </div>
 
-      <h1>{{ event.title }}</h1>
+    <!-- KONDISI 2: DATA EVENT DITEMUKAN -->
+    <div v-else-if="event">
+      <div class="detail-header">
+        <div class="header-tags">
+          <span class="event-tag">{{ event.cat }}</span>
+          <span v-if="event.done" class="status-tag status-ended">Event Finished</span>
+          <span v-else-if="isRegistered" class="status-tag status-registered">Registered</span>
+          <span v-else-if="event.quota <= 0" class="status-tag status-soldout">Sold Out</span>
+          <span v-else class="status-tag status-live">Open Registration</span>
+        </div>
 
-      <div class="meta-info">
-        <span class="meta-item"><strong>Date:</strong> {{ event.date }}</span>
-        <span class="meta-item"><strong>Location:</strong> {{ event.loc }}</span>
-        <span class="meta-item"><strong>Remaining Quota:</strong> {{ event.quota }} Attendees</span>
+        <h1>{{ event.title }}</h1>
+
+        <div class="meta-info">
+          <span class="meta-item"><strong>Date:</strong> {{ event.date }}</span>
+          <span class="meta-item"><strong>Location:</strong> {{ event.loc }}</span>
+          <span class="meta-item"
+            ><strong>Remaining Quota:</strong> {{ event.quota }} Attendees</span
+          >
+        </div>
       </div>
 
       <!-- ASYMMETRICAL LAYOUT -->
@@ -83,9 +105,9 @@ const isRegistered = computed(() => {
               <!-- STATUS 2: SUDAH TERDAFTAR -->
               <div v-else-if="isRegistered" class="registered-action-group">
                 <AppButton variant="secondary" class="btn-register btn-registered" disabled>
-                  Already Registered
+                  ✓ Already Registered
                 </AppButton>
-                <router-link :to="'/browse/your-events/' + event.id" class="view-receipt-link">
+                <router-link to="/browse/your-events" class="view-receipt-link">
                   View Your Ticket Receipt &rarr;
                 </router-link>
               </div>
@@ -119,10 +141,15 @@ const isRegistered = computed(() => {
       </div>
     </div>
 
-    <!-- EMPTY STATE IF ID NOT FOUND -->
+    <!-- KONDISI 3: EMPTY / ERROR STATE IF ID NOT FOUND -->
     <div v-else class="not-found-card">
       <h2>404 - Event Not Found</h2>
-      <p>The event you are looking for is unavailable or has been removed by the organizer.</p>
+      <p>
+        {{
+          error ||
+          'The event you are looking for is unavailable or has been removed by the organizer.'
+        }}
+      </p>
       <AppButton variant="primary" @click="router.push('/browse/events')">
         Back to Event Catalog
       </AppButton>
@@ -167,7 +194,7 @@ const isRegistered = computed(() => {
   padding: var(--space-1) var(--space-4);
   border-radius: 50px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
 }
 
