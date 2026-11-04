@@ -4,7 +4,7 @@ import { RouterView, RouterLink } from 'vue-router'
 
 <template>
   <!-- RAIL & PANE SYSTEM
-  Kerangka khusus untuk kebutuhan produktivitas/pengelolaan aplikasi. -->
+       Kerangka khusus untuk kebutuhan produktivitas/pengelolaan aplikasi. -->
   <div class="dashboard-layout">
     <!-- RAIL: Navigasi samping yang posisinya terkunci (fixed) -->
     <aside class="dashboard-rail">
@@ -12,10 +12,14 @@ import { RouterView, RouterLink } from 'vue-router'
         <router-link to="/">Gatherly Organizer</router-link>
       </div>
       <nav class="rail-nav">
-        <router-link to="/dashboard" class="rail-link active">Overview</router-link>
-        <a href="#" class="rail-link">My Events</a>
-        <a href="#" class="rail-link">Attendees</a>
-        <a href="#" class="rail-link">QR Check-in</a>
+        <router-link to="/dashboard" class="rail-link" exact-active-class="active">
+          <span class="rail-icon">📊</span>
+          <span class="rail-label">Dashboard</span>
+        </router-link>
+        <router-link to="/dashboard/events" class="rail-link" active-class="active">
+          <span class="rail-icon">⚙️</span>
+          <span class="rail-label">Event Management</span>
+        </router-link>
       </nav>
       <div class="rail-footer">
         <router-link to="/" class="rail-link">&larr; Back to Public</router-link>
@@ -37,7 +41,7 @@ import { RouterView, RouterLink } from 'vue-router'
 
 <style scoped>
 /* Full-screen app layout (khas dashboard).
-Tinggi dibatasi 100vh agar bagian rail tidak ikut terguyur ke atas saat pane di-scroll. */
+   Tinggi dibatasi 100vh agar bagian rail tidak ikut terguyur ke atas saat pane di-scroll. */
 .dashboard-layout {
   display: flex;
   height: 100vh;
@@ -74,6 +78,9 @@ Tinggi dibatasi 100vh agar bagian rail tidak ikut terguyur ke atas saat pane di-
 }
 
 .rail-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   padding: var(--space-3) var(--space-6);
   color: #a0a0b0;
   text-decoration: none;
